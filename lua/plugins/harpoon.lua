@@ -24,7 +24,7 @@ return {
         local term_buf = nil
         local term_win = nil
 
-        vim.keymap.set("n", "<leader>t", function()
+        vim.keymap.set("n", "<C-j>", function()
             if term_win and vim.api.nvim_win_is_valid(term_win) then
                 vim.api.nvim_win_hide(term_win)
                 term_win = nil
@@ -38,13 +38,6 @@ return {
                 else
                     vim.cmd("terminal")
                     term_buf = vim.api.nvim_get_current_buf()
-
-                    -- terminal-only mappings:
-                    -- Press 'a' in Normal mode to enter Terminal mode
-                    vim.keymap.set("n", "a", "i", { buffer = term_buf, remap = true })
-
-                    -- Press 'n' in Terminal mode to return to Normal mode
-                    vim.keymap.set("t", "n", [[<C-\><C-n>]], { buffer = term_buf })
                 end
                 vim.cmd("stopinsert")
             end
